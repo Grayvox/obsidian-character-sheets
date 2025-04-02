@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
+	"id": "character-sheets",
+	"name": "Character Sheets",
+	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Create character sheets for your very own traumatized little guys.",
+	"author": "Grayvox",
+	"authorUrl": "https://grayvox.dev",
+	"fundingUrl": "https://ko-fi.com/grayvox",
 	"isDesktopOnly": false
 }
