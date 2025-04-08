@@ -1,4 +1,5 @@
 import { Editor, MarkdownView, Plugin } from 'obsidian';
+import { Sheets } from './sheets';
 
 // Remember to rename these classes and interfaces!
 
@@ -14,49 +15,9 @@ export default class CharacterSheets extends Plugin {
 	settings: MyPluginSettings;
 
 	async onload() {
+		const sheets = new Sheets;
+
 		console.log('Character Sheets: Loading plugin...')
-
-		const standardSheet = `
-[CS]
-
-**NOTE** 
-For this to remain a valid character sheet for the plugin, DO NOT remove the "[CS]" line near the top. 
-It is OK to remove this "NOTE" right here.
-
-## Basic Info
-### Name
-
-### Meaning of Name
-
-### Nicknames
-
-### Date of Birth
-
-## Appearance
-### Hair Color
-
-### Hair Type / Length
-
-### Eye Color
-
-### Skin Tone
-
-### Race
-
-### Extra
-
-## Relations
-### Family
-
-### Friends
-
-### Allies
-
-### Enemies
-
-### Other
-
-`;
 
 		// Create new note with character sheet
 		this.addRibbonIcon('user-pen', 'Click me', () => {
@@ -70,7 +31,7 @@ It is OK to remove this "NOTE" right here.
 			hotkeys: [{ modifiers: ['Mod'], key: "'" }],
 			editorCallback: (editor: Editor, view: MarkdownView) => {
 				editor.replaceRange(
-					standardSheet,
+					sheets.createStandardSheet(),
 					editor.getCursor()
 				);
 			},
