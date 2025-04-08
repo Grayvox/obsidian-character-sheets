@@ -1,4 +1,4 @@
-import { Plugin, setIcon } from 'obsidian';
+import { Editor, MarkdownView, Plugin } from 'obsidian';
 
 // Remember to rename these classes and interfaces!
 
@@ -16,8 +16,21 @@ export default class CharacterSheets extends Plugin {
 	async onload() {
 		console.log('Character Sheets: Loading plugin...')
 
+		// Create new note with character sheet
 		this.addRibbonIcon('user-pen', 'Click me', () => {
 			console.log('Hello, you!');
+		});
+
+		// Create new character sheet
+		this.addCommand({
+			id: 'new-cs',
+			name: 'New character sheet',
+			hotkeys: [{ modifiers: ['Mod'], key: "'" }],
+			editorCallback: (editor: Editor, view: MarkdownView) => {
+				const sel = editor.getSelection()
+			
+				console.log(`You have selected: ${sel}`);
+			},
 		});
 	}
 
