@@ -16,6 +16,48 @@ export default class CharacterSheets extends Plugin {
 	async onload() {
 		console.log('Character Sheets: Loading plugin...')
 
+		const standardSheet = `
+[CS]
+
+**NOTE** 
+For this to remain a valid character sheet for the plugin, DO NOT remove the "[CS]" line near the top. 
+It is OK to remove this "NOTE" right here.
+
+## Basic Info
+### Name
+
+### Meaning of Name
+
+### Nicknames
+
+### Date of Birth
+
+## Appearance
+### Hair Color
+
+### Hair Type / Length
+
+### Eye Color
+
+### Skin Tone
+
+### Race
+
+### Extra
+
+## Relations
+### Family
+
+### Friends
+
+### Allies
+
+### Enemies
+
+### Other
+
+`;
+
 		// Create new note with character sheet
 		this.addRibbonIcon('user-pen', 'Click me', () => {
 			console.log('Hello, you!');
@@ -27,9 +69,10 @@ export default class CharacterSheets extends Plugin {
 			name: 'New character sheet',
 			hotkeys: [{ modifiers: ['Mod'], key: "'" }],
 			editorCallback: (editor: Editor, view: MarkdownView) => {
-				const sel = editor.getSelection()
-			
-				console.log(`You have selected: ${sel}`);
+				editor.replaceRange(
+					standardSheet,
+					editor.getCursor()
+				);
 			},
 		});
 	}
