@@ -1,4 +1,5 @@
-import { Editor, MarkdownView, Plugin } from 'obsidian';
+import { Plugin } from 'obsidian';
+import { SheetCommands } from './sheetCommands';
 import { Sheets } from './sheets';
 
 // Remember to rename these classes and interfaces!
@@ -11,31 +12,24 @@ const DEFAULT_SETTINGS: MyPluginSettings = {
 	mySetting: 'default'
 }
 
-export default class CharacterSheets extends Plugin {
+export default class CharacterSheetsPlugin extends Plugin {
 	settings: MyPluginSettings;
-
+	
 	async onload() {
-		const sheets = new Sheets;
-
 		console.log('Character Sheets: Loading plugin...')
+
+		const commands = new SheetCommands;
+		const sheets = new Sheets;
 
 		// Create new note with character sheet
 		this.addRibbonIcon('user-pen', 'Click me', () => {
-			console.log('Hello, you!');
+			const vault = this.app.vault
+			const randomNum = Math.floor(Math.random() * 90000) + 10000;
+			vault.create(`./Character${randomNum}.md`, sheets.standard())
 		});
 
-		// Create new character sheet
-		this.addCommand({
-			id: 'new-cs',
-			name: 'New character sheet',
-			hotkeys: [{ modifiers: ['Mod'], key: "'" }],
-			editorCallback: (editor: Editor, view: MarkdownView) => {
-				editor.replaceRange(
-					sheets.createStandardSheet(),
-					editor.getCursor()
-				);
-			},
-		});
+		// Generate commands
+		this.addCommand(commands.standardSheetCommand);
 	}
 
 	onunload() {
