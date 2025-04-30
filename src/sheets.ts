@@ -1,44 +1,36 @@
-export class Sheets {
-    standard() {
-        return `[CS]
+export const sheets: Record<string, string> = {
+    standard: `## Basic Info
+#### Name
 
-**NOTE** 
-For this to remain a valid character sheet for the plugin, DO NOT remove the "[CS]" line near the top. 
-It is OK to remove this "NOTE" right here.
+#### Meaning of Name
 
-## Basic Info
-### Name
+#### Nicknames
 
-### Meaning of Name
-
-### Nicknames
-
-### Date of Birth
+#### Date of Birth
 
 ## Appearance
-### Hair Color
+#### Hair Color
 
-### Hair Type / Length
+#### Hair Type / Length
 
-### Eye Color
+#### Eye Color
 
-### Skin Tone
+#### Skin Tone
 
-### Race
+#### Race
 
-### Extra
+#### Extra
 
 ## Relations
-### Family
+#### Family
 
-### Friends
+#### Friends
 
-### Allies
+#### Allies
 
-### Enemies
+#### Enemies
 
-### Other
+#### Other
 
-`;
-    }
+`
 }

@@ -1,14 +1,14 @@
 import { Command, Editor, MarkdownView } from "obsidian";
-import { Sheets } from "./sheets";
+import { sheets } from "./sheets";
 
-export class SheetCommands extends Sheets {
+export class SheetCommands {
     standardSheetCommand: Command = {
         id: 'new-cs',
         name: 'New character sheet',
         hotkeys: [{ modifiers: ['Mod'], key: "'" }],
         editorCallback: (editor: Editor, view: MarkdownView) => {
             editor.replaceRange(
-                this.standard(),
+                sheets.standard,
                 editor.getCursor()
             );
         },
