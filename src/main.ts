@@ -1,6 +1,6 @@
 import { Plugin } from 'obsidian';
-import { SheetCommands } from './sheetCommands';
-import { sheets } from './sheets';
+import addCommands from './commands/command-manager';
+import { createSheetFile } from './sheets/sheet-manager';
 
 interface CharacterSheetsSettings {
 	mySetting: string;
@@ -14,21 +14,17 @@ export default class CharacterSheetsPlugin extends Plugin {
 	settings: CharacterSheetsSettings;
 	
 	async onload() {
-		console.log('Character Sheets: Loading plugin...')
-
-		const commands = new SheetCommands;
+		console.log('Character Sheets: Loading plugin...');
 
 		this.addRibbonIcon('user-pen', 'Create new character sheet ', () => {
-			const vault = this.app.vault
-			const randomNum = Math.floor(Math.random() * 90000) + 10000;
-			vault.create(`./Character${randomNum}.md`, sheets.standard)
+			createSheetFile(this.app);
 		});
 
-		this.addCommand(commands.standardSheetCommand);
+		addCommands(this);
 	}
 
 	onunload() {
-		console.log('Character Sheets: Disabling plugin...')
+		console.log('Character Sheets: Disabling plugin...');
 	}
 
 	async loadSettings() {

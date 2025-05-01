@@ -1,5 +1,4 @@
-export const sheets: Record<string, string> = {
-    standard: `## Basic Info
+export const standardSheet = `## Basic Info
 #### Name
 
 #### Meaning of Name
@@ -32,5 +31,4 @@ export const sheets: Record<string, string> = {
 
 #### Other
 
-`
-}
+`;
