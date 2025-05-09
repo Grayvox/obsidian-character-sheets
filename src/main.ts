@@ -1,6 +1,7 @@
 import { Plugin } from 'obsidian';
 import addCommands from './commands/command-manager';
 import { createSheetFile } from './sheets/sheet-manager';
+import { SheetSelector } from './modals/sheet-selector';
 
 interface CharacterSheetsSettings {
 	mySetting: string;
@@ -14,17 +15,11 @@ export default class CharacterSheetsPlugin extends Plugin {
 	settings: CharacterSheetsSettings;
 	
 	async onload() {
-		console.log('Character Sheets: Loading plugin...');
-
 		this.addRibbonIcon('user-pen', 'Create new character sheet ', () => {
-			createSheetFile(this.app);
+			new SheetSelector(this.app, (result) => createSheetFile(this.app, +result)).open();
 		});
 
 		addCommands(this);
-	}
-
-	onunload() {
-		console.log('Character Sheets: Disabling plugin...');
 	}
 
 	async loadSettings() {
