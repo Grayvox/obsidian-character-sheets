@@ -9,7 +9,7 @@ import {
 export class SheetSelector extends Modal {
 	constructor(app: App, onSubmit: (result: string) => void) {
 		super(app);
-		this.setTitle('Character Sheets');
+		this.setTitle('Character sheets');
 		this.setContent('Select a character sheet to generate!');
 
 		let finalValue = '0';
@@ -17,8 +17,8 @@ export class SheetSelector extends Modal {
 		new Setting(this.contentEl)
 			.addDropdown((dropdown: DropdownComponent) => {
 				dropdown
-					.addOption('0', 'Standard Character')
-					.addOption('1', 'D&D Character')
+					.addOption('0', 'Standard character')
+					.addOption('1', 'D&D character')
 					.onChange((value) => {
 						finalValue = value;
 					})

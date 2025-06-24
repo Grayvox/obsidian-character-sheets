@@ -7,7 +7,6 @@ export default function standardSheetCommand(app: App) {
     const command: Command = {
         id: 'new-standard-cs',
         name: 'New standard character sheet',
-        hotkeys: [{ modifiers: ['Mod'], key: "'" }],
         callback: () => {
             createSheetFile(app, sheetId);
         }
