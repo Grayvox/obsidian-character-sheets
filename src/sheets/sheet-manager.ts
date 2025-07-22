@@ -1,4 +1,4 @@
-import { App } from "obsidian";
+import { App, Vault } from "obsidian";
 import { standardSheet } from "./standard-sheet";
 import { dndSheet } from "./dnd-sheet";
 
@@ -13,9 +13,15 @@ function getSheet(sheetId: number) {
 	}
 }
 
+function verifyDefaultFolder(vault: Vault) {
+	if (vault.getFolderByPath('./Characters/') === null) {
+		vault.createFolder('./Characters/');
+	}
+}
 
 export function createSheetFile(app: App, sheetId: number) {
     const vault = app.vault;
-    const randomNum = Math.floor(Math.random() * 90000);
-    vault.create(`./Character${randomNum}.md`, getSheet(sheetId));
+    const newFile = `Character${Math.floor(Math.random() * 90000)}`;
+	verifyDefaultFolder(app.vault);
+    vault.create(`./Characters/${newFile}.md`, getSheet(sheetId));
 }
