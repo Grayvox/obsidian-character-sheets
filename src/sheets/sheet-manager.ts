@@ -1,4 +1,4 @@
-import { App } from "obsidian";
+import { App, TFile, Vault } from "obsidian";
 import { standardSheet } from "./standard-sheet";
 import { dndSheet } from "./dnd-sheet";
 
@@ -13,9 +13,17 @@ function getSheet(sheetId: number) {
 	}
 }
 
+function verifyDefaultFolder(vault: Vault) {
+	if (vault.getFolderByPath('Characters') === null) {
+		vault.createFolder('Characters');
+	}
+}
 
-export function createSheetFile(app: App, sheetId: number) {
+export async function createSheetFile(app: App, sheetId: number) {
     const vault = app.vault;
-    const randomNum = Math.floor(Math.random() * 90000);
-    vault.create(`./Character${randomNum}.md`, getSheet(sheetId));
+	const num = Math.floor(Math.random() * 90000);
+	verifyDefaultFolder(app.vault);
+    await vault.create(`Characters/Character${num}.md`, getSheet(sheetId));
+	const filePath: TFile | null = app.vault.getFileByPath(`Characters/Character${num}.md`);
+	app.workspace.getLeaf('tab').openFile(filePath as TFile);
 }
